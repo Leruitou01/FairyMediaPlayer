@@ -1,0 +1,19 @@
+name: FairyMediaPlayer
+version: '${project.version}'
+
+main: cn.fairymc.fairyMediaPlayer.Main
+api-version: '1.21.11'
+load: POSTWORLD
+description: MP3 resource-pack music player with playlists, menus and API
+commands:
+  fmp:
+    description: FairyMediaPlayer 音乐播放器
+    aliases: [fairymediaplayer]
+    usage: /fmp help
+permissions:
+  fairymediaplayer.use:
+    description: 使用音乐菜单与个人播放指令
+    default: true
+  fairymediaplayer.admin:
+    description: 管理播放、资源包和配置
+    default: op

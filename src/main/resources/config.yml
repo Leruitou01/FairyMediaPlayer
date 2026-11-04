@@ -1,0 +1,55 @@
+# FairyMediaPlayer / Paper 1.21.11 / Java 21+
+# MP3 放在 plugins/FairyMediaPlayer/music/ 内；file 填相对路径。
+# 修改后执行 /fmp reload，后台完成转换并向在线玩家重新发送资源包。
+conversion:
+  # 首次有歌曲需要处理时自动下载到插件 tools/ffmpeg 目录，以后复用。
+  # 支持 Windows x64 / Linux x64、ARM64。旧配置缺少此项时默认开启。
+  auto-download: true
+  download-timeout-seconds: 1800
+  # 默认名称会使用自动下载版本；填写绝对路径可覆盖，离线可关闭自动下载。
+  ffmpeg: 'ffmpeg'
+  ffprobe: 'ffprobe'
+  timeout-seconds: 300
+resource-pack:
+  format: 75
+  # 改成玩家能访问的公网 IP / 域名；127.0.0.1 只供本机测试。
+  # 内置 HTTP 使用 /{sha1}.zip；公网需放行下方 TCP 端口。
+  public-url: 'http://127.0.0.1:8163/{sha1}.zip'
+  required: false
+  load-timeout-seconds: 120
+  http:
+    enabled: true
+    bind: '0.0.0.0'
+    port: 8163
+auto-play:
+  # 进服音乐锁定个人控制，玩家不能切歌、停止或重载资源包。
+  # 集体播放存在时优先加入集体时间线，不另播进服音乐。
+  enabled: false
+  type: playlist
+  id: lobby
+  repeat: loop
+  join-delay-ticks: 20
+# 歌曲不配置 repeat；单曲默认播放一次，需要重复时在播放指令/API/菜单中指定。
+# 歌单支持 repeat：once = 全部播放完停止；loop = 从头循环整个歌单。
+# auto-play.repeat 是进服播放请求的设置，对歌曲和歌单均有效。
+# once 自然结束后解除个人控制锁；loop 需要管理员停止。
+# selectable 控制菜单及自助指令；管理员/API/自动播放不受此限制。
+# permission 为空表示无需额外权限；歌单权限独立于单曲权限。
+songs: {}
+#  welcome:
+#    name: '欢迎来到服务器'
+#    file: 'welcome.mp3'
+#    selectable: true
+#    permission: ''
+#    volume: 1.0
+#  night:
+#    name: '夜晚'
+#    file: 'night.mp3'
+#    selectable: true
+playlists: {}
+#  lobby:
+#    name: '大厅歌单'
+#    songs: [welcome, night]
+#    selectable: true
+#    permission: ''
+#    repeat: loop
